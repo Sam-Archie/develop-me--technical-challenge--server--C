@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Bounce.DbContexts;
+using Bounce.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bounce.Serivces
+namespace Bounce.Serivces.PlayerRepo
 {
-    public class PlayerRepository
+    public class PlayerRepository : IPlayerRepository
     {
-        public PlayerRepository()
-        {
+        private readonly ApplicationDbContext _context;
 
-        }
-        public void AddPlayer(Player newPlayer)
+        public PlayerRepository(ApplicationDbContext context)
         {
-            _tournamentContext.Players.Add(newPlayer);
-
-            _tournamentContext.SaveChanges();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
     }
 }

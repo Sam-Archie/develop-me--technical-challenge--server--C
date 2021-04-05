@@ -5,18 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bounce.Enitities
+namespace Bounce.Entities
 {
     public class Game
     {
-        [ForeignKey("RoundId")]
-        public int RoundId { get; set; }
-        [Required]
-        [ForeignKey("PlayerId")]
-        public int PlayerAId { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        [ForeignKey("TournamentId")]
+        public Guid TournamentId { get; set; }
         public Player PlayerA { get; set; }
-        [ForeignKey("PlayerId")]
-        public int PlayerBId { get; set; }
         public Player PlayerB { get; set; }
+        public int RoundNumber { get; set; }
     }
 }

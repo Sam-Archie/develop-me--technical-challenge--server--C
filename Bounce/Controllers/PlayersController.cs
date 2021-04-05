@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bounce.DbContexts;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace Bounce.Controllers
     [ApiController]
     public class PlayersController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public PlayersController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         // GET: api/<ValuesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -28,7 +35,7 @@ namespace Bounce.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post()
         {
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bounce.Entities;
+using Bounce.Serivces.TournamentRepo;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,16 @@ using System.Threading.Tasks;
 
 namespace Bounce.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tournament")]
     [ApiController]
     public class TournamentController : ControllerBase
     {
+        private readonly ITournamentRepository _tournanentRepository;
+
+        public TournamentController(ITournamentRepository tournamentRepository)
+        {
+            _tournanentRepository = tournamentRepository;
+        }
         //[HttpGet]
         //public IEnumerable<string> Get()
         //{
@@ -27,8 +35,9 @@ namespace Bounce.Controllers
 
         // POST api/<TournamentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(Tournament tournament)
         {
+            _tournanentRepository.CreateTournament(tournament);
         }
 
         // PUT api/<TournamentController>/5

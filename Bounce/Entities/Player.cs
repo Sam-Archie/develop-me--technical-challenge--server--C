@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bounce.Enitities
+namespace Bounce.Entities
 {
     public class Player
     {
-        public Guid PlayerId { get; set; }
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public int Score { get; set; }
         public string Name { get; set; }
