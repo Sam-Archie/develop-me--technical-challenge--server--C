@@ -1,6 +1,6 @@
 # develop-me--technical-challenge--server--C
 
-This is my API that is currently live at this address:
+This is the API that is currently live at this address:
 
 https://bouncepingpongapi.azurewebsites.net/
 
