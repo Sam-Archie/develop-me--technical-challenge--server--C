@@ -9,12 +9,13 @@ namespace Bounce.Entities
 {
     public class Game
     {
-        [Key]
         public Guid Id { get; set; }
         [ForeignKey("TournamentId")]
         public Guid TournamentId { get; set; }
         public Player PlayerA { get; set; }
         public Player PlayerB { get; set; }
         public int RoundNumber { get; set; }
+        public int PlayerAScore { get; set; }
+        public int PlayerBScore { get; set; }
     }
 }

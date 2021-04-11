@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bounce.Serivces.TournamentRepo
+namespace Bounce.Serivces.GameRepo
 {
-    public interface ITournamentRepository
+    public interface IGameRepository
     {
-        void AddTournament(Tournament tournament);
+        void AddGame(Game game);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Bounce.DbContexts;
 using Bounce.Entities;
 using Bounce.Serivces.TournamentRepo;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Bounce.Serivces
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void CreateTournament(Tournament tournament)
+        public void AddTournament(Tournament tournament)
         {
             _context.Tournaments.Add(tournament);
             _context.SaveChanges();

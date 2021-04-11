@@ -12,7 +12,8 @@ namespace Bounce.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WinningScore = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,9 +25,7 @@ namespace Bounce.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Score = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Winner = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     TotalGames = table.Column<int>(type: "int", nullable: false),
                     TournamentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -50,7 +49,9 @@ namespace Bounce.Migrations
                     TournamentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PlayerAId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PlayerBId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    RoundNumber = table.Column<int>(type: "int", nullable: false)
+                    RoundNumber = table.Column<int>(type: "int", nullable: false),
+                    PlayerAScore = table.Column<int>(type: "int", nullable: false),
+                    PlayerBScore = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,12 +68,6 @@ namespace Bounce.Migrations
                         principalTable: "Players",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Games_Tournaments_TournamentId",
-                        column: x => x.TournamentId,
-                        principalTable: "Tournaments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -84,11 +79,6 @@ namespace Bounce.Migrations
                 name: "IX_Games_PlayerBId",
                 table: "Games",
                 column: "PlayerBId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Games_TournamentId",
-                table: "Games",
-                column: "TournamentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_TournamentId",

@@ -11,11 +11,7 @@ namespace Bounce.Entities
         [Key]
         public Guid Id { get; set; }
         [Required]
-        public int Score { get; set; }
         public string Name { get; set; }
-        public bool Winner { get; set; }
-        public int Rating { get; set; }
-        public int TotalGames { get; set; }
     }
     public enum PlayerRating
     {

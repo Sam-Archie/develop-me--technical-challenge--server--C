@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bounce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210405121110_Initial")]
-    partial class Initial
+    [Migration("20210405180551_Player")]
+    partial class Player
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,8 +30,14 @@ namespace Bounce.Migrations
                     b.Property<Guid?>("PlayerAId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("PlayerAScore")
+                        .HasColumnType("int");
+
                     b.Property<Guid?>("PlayerBId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PlayerBScore")
+                        .HasColumnType("int");
 
                     b.Property<int>("RoundNumber")
                         .HasColumnType("int");
@@ -45,8 +51,6 @@ namespace Bounce.Migrations
 
                     b.HasIndex("PlayerBId");
 
-                    b.HasIndex("TournamentId");
-
                     b.ToTable("Games");
                 });
 
@@ -57,22 +61,11 @@ namespace Bounce.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalGames")
-                        .HasColumnType("int");
 
                     b.Property<Guid?>("TournamentId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Winner")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -91,6 +84,9 @@ namespace Bounce.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("WinningScore")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Tournaments");
@@ -105,12 +101,6 @@ namespace Bounce.Migrations
                     b.HasOne("Bounce.Entities.Player", "PlayerB")
                         .WithMany()
                         .HasForeignKey("PlayerBId");
-
-                    b.HasOne("Bounce.Entities.Tournament", null)
-                        .WithMany("Games")
-                        .HasForeignKey("TournamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("PlayerA");
 
@@ -127,8 +117,6 @@ namespace Bounce.Migrations
             modelBuilder.Entity("Bounce.Entities.Tournament", b =>
                 {
                     b.Navigation("Entrants");
-
-                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

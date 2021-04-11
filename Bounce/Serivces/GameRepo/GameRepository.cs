@@ -6,26 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bounce.Serivces.PlayerRepo
+namespace Bounce.Serivces.GameRepo
 {
-    public class PlayerRepository : IPlayerRepository
+    public class GameRepository : IGameRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public PlayerRepository(ApplicationDbContext context)
+        public GameRepository(ApplicationDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IEnumerable<Player> GetPlayers()
+        public void AddGame(Game game)
         {
-            return _context.Players.ToList();
-        }
-
-        public void AddPlayer(Player player)
-        {
-            _context.Entry(player).State = EntityState.Unchanged;
-            _context.Players.Add(player);
+            _context.Entry(game.PlayerA).State = EntityState.Unchanged;
+            _context.Entry(game.PlayerB).State = EntityState.Unchanged;
+            _context.Games.Add(game);
             _context.SaveChanges();
         }
     }
